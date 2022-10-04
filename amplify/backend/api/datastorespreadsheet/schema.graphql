@@ -3,8 +3,17 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
+type SpreadSheet @model {
+  id: ID!
+  name: String
+  description: String
+  cells: [Cell] @hasMany(indexName: "bySpreadSheet", fields: ["id"])
+}
+
 type Cell @model {
   id: ID!
+  spreadSheetId: ID!
+    @index(name: "bySpreadSheet", sortKeyFields: ["row", "column"])
   row: String!
   column: String!
   value: String

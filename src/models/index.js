@@ -4,8 +4,9 @@ import { schema } from './schema';
 
 
 
-const { Cell } = initSchema(schema);
+const { SpreadSheet, Cell } = initSchema(schema);
 
 export {
+  SpreadSheet,
   Cell
 };

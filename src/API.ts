@@ -2,21 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateCellInput = {
+export type CreateSpreadSheetInput = {
   id?: string | null,
-  row: string,
-  column: string,
-  value?: string | null,
-  _version?: number | null,
+  name?: string | null,
+  description?: string | null,
 };
 
-export type ModelCellConditionInput = {
-  row?: ModelStringInput | null,
-  column?: ModelStringInput | null,
-  value?: ModelStringInput | null,
-  and?: Array< ModelCellConditionInput | null > | null,
-  or?: Array< ModelCellConditionInput | null > | null,
-  not?: ModelCellConditionInput | null,
+export type ModelSpreadSheetConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelSpreadSheetConditionInput | null > | null,
+  or?: Array< ModelSpreadSheetConditionInput | null > | null,
+  not?: ModelSpreadSheetConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -59,40 +56,59 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type SpreadSheet = {
+  __typename: "SpreadSheet",
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  cells?: ModelCellConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelCellConnection = {
+  __typename: "ModelCellConnection",
+  items:  Array<Cell | null >,
+  nextToken?: string | null,
+};
+
 export type Cell = {
   __typename: "Cell",
   id: string,
+  spreadSheetId: string,
   row: string,
   column: string,
   value?: string | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
-export type UpdateCellInput = {
+export type UpdateSpreadSheetInput = {
   id: string,
-  row?: string | null,
-  column?: string | null,
+  name?: string | null,
+  description?: string | null,
+};
+
+export type DeleteSpreadSheetInput = {
+  id: string,
+};
+
+export type CreateCellInput = {
+  id?: string | null,
+  spreadSheetId: string,
+  row: string,
+  column: string,
   value?: string | null,
-  _version?: number | null,
 };
 
-export type DeleteCellInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type ModelCellFilterInput = {
-  id?: ModelIDInput | null,
+export type ModelCellConditionInput = {
+  spreadSheetId?: ModelIDInput | null,
   row?: ModelStringInput | null,
   column?: ModelStringInput | null,
   value?: ModelStringInput | null,
-  and?: Array< ModelCellFilterInput | null > | null,
-  or?: Array< ModelCellFilterInput | null > | null,
-  not?: ModelCellFilterInput | null,
+  and?: Array< ModelCellConditionInput | null > | null,
+  or?: Array< ModelCellConditionInput | null > | null,
+  not?: ModelCellConditionInput | null,
 };
 
 export type ModelIDInput = {
@@ -111,11 +127,132 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelCellConnection = {
-  __typename: "ModelCellConnection",
-  items:  Array<Cell | null >,
+export type UpdateCellInput = {
+  id: string,
+  spreadSheetId?: string | null,
+  row?: string | null,
+  column?: string | null,
+  value?: string | null,
+};
+
+export type DeleteCellInput = {
+  id: string,
+};
+
+export type ModelSpreadSheetFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelSpreadSheetFilterInput | null > | null,
+  or?: Array< ModelSpreadSheetFilterInput | null > | null,
+  not?: ModelSpreadSheetFilterInput | null,
+};
+
+export type ModelSpreadSheetConnection = {
+  __typename: "ModelSpreadSheetConnection",
+  items:  Array<SpreadSheet | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
+};
+
+export type ModelCellFilterInput = {
+  id?: ModelIDInput | null,
+  spreadSheetId?: ModelIDInput | null,
+  row?: ModelStringInput | null,
+  column?: ModelStringInput | null,
+  value?: ModelStringInput | null,
+  and?: Array< ModelCellFilterInput | null > | null,
+  or?: Array< ModelCellFilterInput | null > | null,
+  not?: ModelCellFilterInput | null,
+};
+
+export type CreateSpreadSheetMutationVariables = {
+  input: CreateSpreadSheetInput,
+  condition?: ModelSpreadSheetConditionInput | null,
+};
+
+export type CreateSpreadSheetMutation = {
+  createSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSpreadSheetMutationVariables = {
+  input: UpdateSpreadSheetInput,
+  condition?: ModelSpreadSheetConditionInput | null,
+};
+
+export type UpdateSpreadSheetMutation = {
+  updateSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSpreadSheetMutationVariables = {
+  input: DeleteSpreadSheetInput,
+  condition?: ModelSpreadSheetConditionInput | null,
+};
+
+export type DeleteSpreadSheetMutation = {
+  deleteSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateCellMutationVariables = {
@@ -127,14 +264,12 @@ export type CreateCellMutation = {
   createCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -147,14 +282,12 @@ export type UpdateCellMutation = {
   updateCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -167,14 +300,66 @@ export type DeleteCellMutation = {
   deleteCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
+  } | null,
+};
+
+export type GetSpreadSheetQueryVariables = {
+  id: string,
+};
+
+export type GetSpreadSheetQuery = {
+  getSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSpreadSheetsQueryVariables = {
+  filter?: ModelSpreadSheetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSpreadSheetsQuery = {
+  listSpreadSheets?:  {
+    __typename: "ModelSpreadSheetConnection",
+    items:  Array< {
+      __typename: "SpreadSheet",
+      id: string,
+      name?: string | null,
+      description?: string | null,
+      cells?:  {
+        __typename: "ModelCellConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -186,14 +371,12 @@ export type GetCellQuery = {
   getCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -209,44 +392,89 @@ export type ListCellsQuery = {
     items:  Array< {
       __typename: "Cell",
       id: string,
+      spreadSheetId: string,
       row: string,
       column: string,
       value?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
-export type SyncCellsQueryVariables = {
-  filter?: ModelCellFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
+export type OnCreateSpreadSheetSubscription = {
+  onCreateSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
-export type SyncCellsQuery = {
-  syncCells?:  {
-    __typename: "ModelCellConnection",
-    items:  Array< {
-      __typename: "Cell",
-      id: string,
-      row: string,
-      column: string,
-      value?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
+export type OnUpdateSpreadSheetSubscription = {
+  onUpdateSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSpreadSheetSubscription = {
+  onDeleteSpreadSheet?:  {
+    __typename: "SpreadSheet",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    cells?:  {
+      __typename: "ModelCellConnection",
+      items:  Array< {
+        __typename: "Cell",
+        id: string,
+        spreadSheetId: string,
+        row: string,
+        column: string,
+        value?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -254,14 +482,12 @@ export type OnCreateCellSubscription = {
   onCreateCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -269,14 +495,12 @@ export type OnUpdateCellSubscription = {
   onUpdateCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -284,13 +508,11 @@ export type OnDeleteCellSubscription = {
   onDeleteCell?:  {
     __typename: "Cell",
     id: string,
+    spreadSheetId: string,
     row: string,
     column: string,
     value?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
